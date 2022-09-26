@@ -1,0 +1,46 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2022/05/26 15:26:27
+// Design Name: 
+// Module Name: SPI_bus_TB
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module top_module_TB(  );
+	reg						CLK_1M					;
+    reg  [7:0]              in				        ;  
+	wire [7:0]				pedge					;   
+
+
+  
+    
+  top_module top_module_uut(
+	.clk					( CLK_1M			),	
+    .in       				( in       		    ), 
+    .pedge				    ( pedge			    ));
+	
+
+  initial begin
+    CLK_1M = 0;
+    forever #50  CLK_1M  = ~CLK_1M ;
+  end
+  
+   always begin
+       repeat(10)@(posedge CLK_1M);//延迟10个时钟周期
+	   in = {$random} %15;
+   end
+endmodule
